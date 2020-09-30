@@ -18,6 +18,10 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, ...$guards)
     {
+        if (Auth::guard($guards)->check()) {
+            session()->flash('info', '您已登录，无需再次操作。');
+            return redirect('/');
+        }
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
