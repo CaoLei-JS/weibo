@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\StaticPagesController;
+use App\Http\Controllers\StatusesController;
 use App\Http\Controllers\UsersController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,4 +34,4 @@ Route::get('signup/confirm/{token}', [UsersController::class, 'confirmEmail'])->
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('statuses', StatusesController::class, ['only' => ['store', 'destroy']]);
